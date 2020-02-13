@@ -146,14 +146,17 @@ java.util包下面的所有的集合类都是fail-fast的，而java.util.concurr
 	超过重试次数如果仍然失败怎么办？(synchronize互斥锁)
 	CAS和synchronize有什么区别？都用synchronize不行么？(CAS是乐观锁，不需要阻塞，硬件级别实现的原子性；synchronize会阻塞，JVM级别实现的原子性。使用场景不同，
 	线程冲突严重时CAS会造成CPU压力过大，导致吞吐量下降，synchronize的原理是先自旋然后阻塞，线程冲突严重仍然有较高的吞吐量，因为线程都被阻塞了，不会占用CPU )
+	JAVA1.5开始引入了CAS，主要代码都放在JUC的java.util.concurrent.atomic包下,CAS操作都是通过sun包下Unsafe类实现，而Unsafe类中的方法都是native方法，由JVM本地实现
+	AtomicInteger/AtomicBoolean/AtomicIntegerArray 参考->https://www.cnblogs.com/javalyy/p/8882172.html
 	如果要保证线程安全怎么办？(ConcurrentHashMap)
 	ConcurrentHashMap怎么实现线程安全的？(分段锁)
 		ConcurrentHashMap使用segment来分段和管理锁，segment继承自ReentrantLock，因此ConcurrentHashMap使用ReentrantLock来保证线程安全。
 	SimpleDateFormat对象是线程不安全的
 9、线程创建
-	Runnable自 Java 1.0 以来一直存在，但Callable仅在 Java 1.5 中引入,目的就是为了来处理Runnable不支持的用例。Runnable 接口不会返回结果或抛出检查异常，但是Callable 接口可以。所以，如果任务不需要返回结果或抛出异常推荐使用 Runnable 接口，这样代码看起来会更加简洁。
+	Runnable自 Java 1.0 以来一直存在，但Callable仅在 Java 1.5 中引入,目的就是为了来处理Runnable不支持的用例。
+	Runnable 接口不会返回结果或抛出检查异常，但是Callable 接口可以。所以，如果任务不需要返回结果或抛出异常推荐使用 Runnable 接口，这样代码看起来会更加简洁。
 
-	工具类 Executors 可以实现 Runnable 对象和 Callable 对象之间的相互转换。（Executors.callable（Runnable task）或 Executors.callable（Runnable task，Object resule））
+	工具类 Executors 可以实现 Runnable 对象和 Callable 对象之间的转换。（Executors.callable（Runnable task）或 Executors.callable（Runnable task，Object resule））
 
 	Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行。 
 	wait()和sleep()共同点 ： 
@@ -323,6 +326,7 @@ java.util包下面的所有的集合类都是fail-fast的，而java.util.concurr
 	使用 @ComponentScan 注解定义要扫描的路径从中找出标识了需要装配的类自动装配到 Spring 的 bean 到容器中
 	@Autowired/@Component/@Repository/@Service/@Controller
 17、spring整合springmvc，整合mybatis
+	spring整合springmvc，springmvc的注意事项
 	Servlet的生命周期分为5个阶段：加载、创建、初始化、处理客户请求、卸载。
 		1.加载：容器通过类加载器使用Servlet类对应的文件来加载Servlet
 		2.创建：通过调用Servlet的构造函数来创建一个Servlet实例
@@ -1060,3 +1064,5 @@ finalize
 springboot整合springmvc
 springboot整合dubbo
 类加载器
+动态代理demo，aop、IOC的demo
+springmvc执行流程demo,验证springmvc常用注解
