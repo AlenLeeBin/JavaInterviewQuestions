@@ -983,6 +983,9 @@ servlet的主要两种跳转方式，forward又叫转发，redirect叫重定向�
 				批量confirm模式：producer每发送一批消息后，调用waitForConfirms()方法，等待broker端confirm。
 				异步confirm模式：提供一个回调方法，broker confirm了一条或者多条消息后producer端会回调这个方法。
 	参考->https://blog.csdn.net/weixin_38087443/article/details/100167717
+rabbitmq消息确保100%发送并消费示例：
+    https://www.jianshu.com/p/dca01aad6bc8
+    代码地址：https://github.com/wangzaiplus/springboot/tree/wxw
 91、rabbitmq消息基于什么传输？
 	MQ两种消息传输方式:
 		点对点（代码中的简单传递模式）;
